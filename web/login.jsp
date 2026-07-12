@@ -40,6 +40,7 @@
 <%
     String error = request.getParameter("error");
     String logout = request.getParameter("logout");
+    String registered = request.getParameter("registered");
     if (error != null) {
 %>
     <p class="error">Invalid email or password</p>
@@ -48,8 +49,13 @@
 %>
     <p style="color:green; text-align:center;">You have been logged out successfully.</p>
 <%
+    } else if (registered != null) {
+%>
+    <p style="color:green; text-align:center;">Registration successful! Please log in.</p>
+<%
     }
 %>
+
         <form action="LoginServlet" method="post">
             <label>Email</label>
             <input type="email" name="email" required>
@@ -57,6 +63,7 @@
             <input type="password" name="password" required>
             <input type="submit" value="Login">
         </form>
+        <a href="registerSelf.jsp">New patient? Register here</a>
     </div>
 </body>
 </html>
