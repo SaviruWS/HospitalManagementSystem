@@ -37,14 +37,19 @@
 <body>
     <div class="login-box">
         <h2>Hospital Login</h2>
-        <%
-            String error = request.getParameter("error");
-            if (error != null) {
-        %>
-            <p class="error">Invalid email or password</p>
-        <%
-            }
-        %>
+<%
+    String error = request.getParameter("error");
+    String logout = request.getParameter("logout");
+    if (error != null) {
+%>
+    <p class="error">Invalid email or password</p>
+<%
+    } else if (logout != null) {
+%>
+    <p style="color:green; text-align:center;">You have been logged out successfully.</p>
+<%
+    }
+%>
         <form action="LoginServlet" method="post">
             <label>Email</label>
             <input type="email" name="email" required>

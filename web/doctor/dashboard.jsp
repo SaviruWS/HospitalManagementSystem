@@ -1,2 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<html><body><h1>Doctor Dashboard</h1></body></html>
+<html>
+    <body>
+        <h1>Doctor Dashboard</h1>
+
+    <p>Welcome, <%= session.getAttribute("fullName") %></p>
+    <a href="../LogoutServlet">Logout</a>    
+    
+    </body>
+</html>
