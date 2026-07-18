@@ -73,14 +73,14 @@ public class UpdateAppointmentStatusServlet extends HttpServlet {
                 if ("confirmed".equals(newStatus)) {
                     subject = "Appointment Confirmed";
                     body = "Dear " + patientName + ",\n\n"
-                            + "Your appointment with Dr. " + doctorName + " on " + apptDate
+                            + "Your appointment with " + doctorName + " on " + apptDate
                             + " at " + apptTime + " has been CONFIRMED.\n\n"
                             + "Please arrive 15 minutes early.\n\n"
                             + "Thank you,\nNovaCare Private Hospital Management System";
                 } else {
                     subject = "Appointment Cancelled";
                     body = "Dear " + patientName + ",\n\n"
-                            + "We regret to inform you that your appointment with Dr. " + doctorName
+                            + "We regret to inform you that your appointment with " + doctorName
                             + " on " + apptDate + " at " + apptTime + " has been CANCELLED.\n\n"
                             + "Please contact us or book another appointment.\n\n"
                             + "Thank you,\nNovaCare Private Hospital Management System";

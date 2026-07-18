@@ -98,7 +98,7 @@ public class BookAppointmentServlet extends HttpServlet {
             if (patientEmail != null) {
                 String subject = "Appointment Confirmed";
                 String body = "Dear " + patientName + ",\n\n"
-                        + "Your appointment with Dr. " + doctorName + " on " + appointmentDate
+                        + "Your appointment with  " + doctorName + " on " + appointmentDate
                         + " at " + appointmentTime + " has been CONFIRMED.\n\n"
                         + "Please arrive 15 minutes early.\n\n"
                         + "Thank you,\nNovaCare Private Hospital Management System";

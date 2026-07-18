@@ -2,51 +2,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Patient Registration</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #f2f2f2; }
-        .form-box {
-            width: 420px;
-            margin: 50px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h2 { text-align: center; color: #2c3e50; }
-        label { font-weight: bold; margin-top: 10px; display: block; }
-        input[type=text], input[type=email], input[type=password],
-        input[type=date], select {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0 12px 0;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        input[type=submit] {
-            width: 100%;
-            padding: 10px;
-            background: #2c3e50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .error { color: red; text-align: center; }
-        .success { color: green; text-align: center; }
-        a { display: block; text-align: center; margin-top: 10px; }
-    </style>
+    <title>NovaCare Private Hospital - Patient Registration</title>
+    <link rel="stylesheet" href="css/theme.css">
 </head>
-<body>
-    <div class="form-box">
-        <h2>Patient Registration</h2>
+<body class="auth-page">
+    <div class="auth-box" style="width: 460px;">
+        <div class="logo-wrap">
+            <img src="images/logo.jpg" alt="NovaCare Private Hospital">
+        </div>
+        <h2 style="margin-top:0;">Patient Registration</h2>
 
         <%
             String error = request.getParameter("error");
             if (error != null) {
         %>
-            <p class="error">Registration failed. Email may already be in use.</p>
+            <div class="alert alert-error">Registration failed. Email may already be in use.</div>
         <%
             }
         %>
@@ -79,7 +49,8 @@
             <label>Address</label>
             <input type="text" name="address" required>
 
-            <input type="submit" value="Register">
+            <br><br>
+            <button type="submit" class="btn" style="width:100%;">Register</button>
         </form>
         <a href="login.jsp">Already have an account? Login here</a>
     </div>

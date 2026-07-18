@@ -1,0 +1,267 @@
+/* ===================================================
+   NovaCare Private Hospital Management System
+   Shared Theme Stylesheet
+   =================================================== */
+
+:root {
+  --color-primary: #0F766E;      /* deep teal */
+  --color-primary-dark: #0B5A54;
+  --color-navy: #1E293B;         /* sidebar / header */
+  --color-navy-light: #334155;
+  --color-bg: #F8FAFC;           /* page background */
+  --color-card: #FFFFFF;
+  --color-accent: #F97362;       /* coral accent */
+  --color-success: #16A34A;
+  --color-danger: #DC2626;
+  --color-pending: #D97706;
+  --color-text: #1E293B;
+  --color-text-muted: #64748B;
+  --color-border: #E2E8F0;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+a { color: var(--color-primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ===== Layout: Sidebar + Main Content ===== */
+.app-layout { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 240px;
+  background: var(--color-navy);
+  color: #E2E8F0;
+  padding: 24px 0;
+  flex-shrink: 0;
+}
+
+.sidebar .brand {
+  padding: 0 20px 20px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  margin-bottom: 16px;
+}
+
+.brand-logo-box {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px 14px;
+  box-shadow: var(--shadow);
+}
+
+.brand-logo-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 24px;
+  color: #CBD5E1;
+  font-size: 14px;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  border-left-color: var(--color-accent);
+  text-decoration: none;
+}
+
+.sidebar .logout-link {
+  margin-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 16px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 32px 40px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-header h2 {
+  margin: 0 0 4px 0;
+  color: var(--color-navy);
+  font-size: 22px;
+}
+
+.page-header p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 13.5px;
+}
+
+.welcome-badge {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  box-shadow: var(--shadow);
+}
+
+.welcome-badge strong { color: var(--color-navy); }
+
+/* ===== Cards ===== */
+.card {
+  background: var(--color-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-bottom: 20px;
+  border: 1px solid var(--color-border);
+}
+
+/* ===== Forms ===== */
+label {
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--color-navy);
+  margin-top: 12px;
+  display: block;
+}
+
+input[type=text], input[type=email], input[type=password],
+input[type=date], input[type=time], input[type=number], select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 6px 0 4px 0;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+  transition: border-color 0.15s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn:hover { background: var(--color-primary-dark); text-decoration: none; }
+
+.btn-accent { background: var(--color-accent); }
+.btn-accent:hover { background: #E85A4A; }
+
+.btn-success { background: var(--color-success); }
+.btn-success:hover { background: #128038; }
+
+.btn-danger { background: var(--color-danger); }
+.btn-danger:hover { background: #B91C1C; }
+
+.btn-sm { padding: 6px 14px; font-size: 13px; }
+
+/* ===== Tables ===== */
+table { width: 100%; border-collapse: collapse; }
+th {
+  background: var(--color-navy);
+  color: #fff;
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+th:first-child { border-top-left-radius: 8px; }
+th:last-child { border-top-right-radius: 8px; }
+td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 14px;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #F1F5F9; }
+
+/* ===== Status badges ===== */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.badge-confirmed { background: #DCFCE7; color: #166534; }
+.badge-pending { background: #FEF3C7; color: #92400E; }
+.badge-cancelled { background: #FEE2E2; color: #991B1B; }
+.badge-completed { background: #DBEAFE; color: #1E40AF; }
+
+/* ===== Alerts ===== */
+.alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 18px;
+}
+.alert-success { background: #DCFCE7; color: #166534; border: 1px solid #BBF7D0; }
+.alert-error { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
+.alert-info { background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A; }
+
+/* ===== Login / public pages ===== */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-navy) 0%, var(--color-primary) 100%);
+}
+.auth-box {
+  width: 400px;
+  background: #fff;
+  padding: 36px;
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+}
+.auth-box h2 {
+  color: var(--color-navy);
+  text-align: center;
+  margin-top: 0;
+}
+.auth-box .logo-wrap {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.auth-box .logo-wrap img {
+  max-width: 220px;
+  height: auto;
+}
+.auth-box a { display: block; text-align: center; margin-top: 14px; font-size: 13.5px; }
