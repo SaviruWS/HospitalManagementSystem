@@ -8,7 +8,7 @@ public class DBConnection {
 
     private static final String URL = "jdbc:mysql://127.0.0.1:3306/hospital_db?zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = ""; // XAMPP default is blank
+    private static final String PASSWORD = "";
 
     public static Connection getConnection() throws SQLException {
         try {

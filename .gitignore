@@ -1,8 +1,9 @@
+src/java/config.properties
 build/
-   dist/
-   nbproject/private/
-   nbproject/Makefile-*.mk
-   nbproject/Package-*.bash
-   *.class
-   *.log
-   .netbeans_automatic_build
+dist/
+nbproject/private/
+nbproject/Makefile-*.mk
+nbproject/Package-*.bash
+*.class
+*.log
+.netbeans_automatic_build
