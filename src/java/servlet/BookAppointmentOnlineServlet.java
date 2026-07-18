@@ -100,7 +100,7 @@ public class BookAppointmentOnlineServlet extends HttpServlet {
                         + "Your appointment request for " + appointmentDate + " at " + appointmentTime
                         + " has been received and is pending confirmation from our staff.\n"
                         + "You will receive another email once it is confirmed.\n\n"
-                        + "Thank you,\nHospital Management System";
+                        + "Thank you,\nNovaCare Private Hospital Management System";
                 EmailUtil.sendEmail(patientEmail, subject, body);
             }
 

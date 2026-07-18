@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import util.DBConnection;
+import util.EmailUtil;
 
 @WebServlet(name = "BookAppointmentServlet", urlPatterns = {"/BookAppointmentServlet"})
 public class BookAppointmentServlet extends HttpServlet {
@@ -69,7 +70,40 @@ public class BookAppointmentServlet extends HttpServlet {
             insertStmt.setTime(5, appointmentTime);
             insertStmt.executeUpdate();
 
-            conn.commit();
+            // Step 3: Fetch patient email/name + doctor name, needed to build the confirmation email
+            PreparedStatement infoStmt = conn.prepareStatement(
+                "SELECT u.email, u.full_name AS patient_name, ud.full_name AS doctor_name " +
+                "FROM patients p " +
+                "JOIN users u ON p.user_id = u.user_id " +
+                "JOIN doctors d ON d.doctor_id = ? " +
+                "JOIN users ud ON d.user_id = ud.user_id " +
+                "WHERE p.patient_id = ?");
+            infoStmt.setInt(1, doctorId);
+            infoStmt.setInt(2, patientId);
+            ResultSet infoRs = infoStmt.executeQuery();
+
+            String patientEmail = null;
+            String patientName = null;
+            String doctorName = null;
+
+            if (infoRs.next()) {
+                patientEmail = infoRs.getString("email");
+                patientName = infoRs.getString("patient_name");
+                doctorName = infoRs.getString("doctor_name");
+            }
+
+            conn.commit(); // booking is finalized here
+
+            // Step 4: Send confirmation email — after commit, so email delivery never risks the booking itself
+            if (patientEmail != null) {
+                String subject = "Appointment Confirmed";
+                String body = "Dear " + patientName + ",\n\n"
+                        + "Your appointment with Dr. " + doctorName + " on " + appointmentDate
+                        + " at " + appointmentTime + " has been CONFIRMED.\n\n"
+                        + "Please arrive 15 minutes early.\n\n"
+                        + "Thank you,\nNovaCare Private Hospital Management System";
+                EmailUtil.sendEmail(patientEmail, subject, body);
+            }
 
             response.sendRedirect("receptionist/bookAppointment.jsp?success=1");
 

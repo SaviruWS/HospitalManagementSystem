@@ -15,9 +15,7 @@ public class EmailUtil {
     private static String fromEmail;
     private static String appPassword;
 
-    // Load credentials once, from config.properties on the classpath (WEB-INF/classes).
-    // This is more reliable than a raw file path, since it doesn't depend on Tomcat's
-    // current working directory.
+    
     static {
         try (InputStream input = EmailUtil.class.getClassLoader().getResourceAsStream("config.properties")) {
             if (input == null) {

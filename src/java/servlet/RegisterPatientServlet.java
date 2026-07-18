@@ -25,9 +25,9 @@ public class RegisterPatientServlet extends HttpServlet {
         String dob = request.getParameter("dob");
         String gender = request.getParameter("gender");
         String address = request.getParameter("address");
-        String source = request.getParameter("source"); // "receptionist" or "self"
+        String source = request.getParameter("source"); 
 
-        // Determine where to redirect back to on failure, based on who submitted the form
+      
         String failureRedirect = "self".equals(source)
                 ? "registerSelf.jsp?error=1"
                 : "receptionist/registerPatient.jsp?error=1";
@@ -39,9 +39,9 @@ public class RegisterPatientServlet extends HttpServlet {
 
         try {
             conn = DBConnection.getConnection();
-            conn.setAutoCommit(false); // start transaction — both inserts succeed together, or neither does
+            conn.setAutoCommit(false);
 
-            // Step 1: Insert into users table
+          
             PreparedStatement userStmt = conn.prepareStatement(insertUser, PreparedStatement.RETURN_GENERATED_KEYS);
             userStmt.setString(1, fullName);
             userStmt.setString(2, email);
@@ -49,14 +49,14 @@ public class RegisterPatientServlet extends HttpServlet {
             userStmt.setString(4, contactNumber);
             userStmt.executeUpdate();
 
-            // Get the auto-generated user_id to link the patients record
+       
             ResultSet generatedKeys = userStmt.getGeneratedKeys();
             int newUserId = -1;
             if (generatedKeys.next()) {
                 newUserId = generatedKeys.getInt(1);
             }
 
-            // Step 2: Insert into patients table, linked via user_id
+           
             PreparedStatement patientStmt = conn.prepareStatement(insertPatient);
             patientStmt.setInt(1, newUserId);
             patientStmt.setString(2, dob);
@@ -64,9 +64,9 @@ public class RegisterPatientServlet extends HttpServlet {
             patientStmt.setString(4, address);
             patientStmt.executeUpdate();
 
-            conn.commit(); // both inserts succeeded — save permanently
+            conn.commit(); 
 
-            // Redirect differently depending on who registered the patient
+         
             if ("self".equals(source)) {
                 // Patient registered themselves — send them to login with a success flag
                 response.sendRedirect("login.jsp?registered=1");
@@ -79,7 +79,7 @@ public class RegisterPatientServlet extends HttpServlet {
             e.printStackTrace();
             if (conn != null) {
                 try {
-                    conn.rollback(); // something failed — undo any partial insert
+                    conn.rollback(); 
                 } catch (Exception rollbackEx) {
                     rollbackEx.printStackTrace();
                 }

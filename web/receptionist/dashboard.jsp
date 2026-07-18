@@ -7,5 +7,6 @@
     <a href="../LogoutServlet">Logout</a>    
     <a href="registerPatient.jsp">Register New Patient</a>
     <a href="bookAppointment.jsp">Book Appointment (Manual)</a>
+    <a href="pendingAppointments.jsp">Pending Appointments</a>
     </body>
 </html>
