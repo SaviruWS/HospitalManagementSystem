@@ -105,7 +105,8 @@
                             PreparedStatement slotStmt = conn.prepareStatement(
                                 "SELECT ds.schedule_id, ds.available_date, ds.start_time, ds.end_time, ds.max_patients, " +
                                 "(SELECT COUNT(*) FROM appointments a WHERE a.schedule_id = ds.schedule_id AND a.status != 'cancelled') AS booked_count " +
-                                "FROM doctor_schedule ds WHERE ds.doctor_id = ? AND ds.available_date >= CURDATE() " +
+                                "FROM doctor_schedule ds WHERE ds.doctor_id = ? AND ds.available_date >= CURDATE() AND ds.status = 'active' " +
+                                        
                                 "ORDER BY ds.available_date, ds.start_time");
                             slotStmt.setInt(1, Integer.parseInt(doctorIdParam));
                             ResultSet slotRs = slotStmt.executeQuery();

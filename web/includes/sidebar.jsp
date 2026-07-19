@@ -24,8 +24,12 @@
         </div>
         <nav>
             <% if ("admin".equals(role)) { %>
-                <a href="dashboard.jsp">Dashboard</a>
-                <a href="addStaff.jsp">Add Staff</a>
+                <a href="<%= request.getContextPath() %>/admin/dashboard.jsp">Dashboard</a>
+                <a href="<%= request.getContextPath() %>/admin/addStaff.jsp">Add Staff</a>
+                <a href="<%= request.getContextPath() %>/admin/manageUsers.jsp">Manage Users</a>
+                <a href="<%= request.getContextPath() %>/receptionist/patientList.jsp">Patient List</a>
+                <a href="<%= request.getContextPath() %>/receptionist/allAppointments.jsp">All Appointments</a>
+                <a href="<%= request.getContextPath() %>/receptionist/pendingAppointments.jsp">Pending Appointments</a>
             <% } else if ("doctor".equals(role)) { %>
                 <a href="dashboard.jsp">Dashboard</a>
                 <a href="manageSchedule.jsp">Manage Schedule</a>
@@ -35,6 +39,7 @@
             <% } else if ("receptionist".equals(role)) { %>
                 <a href="dashboard.jsp">Dashboard</a>
                 <a href="registerPatient.jsp">Register Patient</a>
+                <a href="patientList.jsp">Patient List</a>
                 <a href="bookAppointment.jsp">Book Appointment</a>
                 <a href="pendingAppointments.jsp">Pending Appointments</a>
                 <a href="allAppointments.jsp">All Appointments</a>

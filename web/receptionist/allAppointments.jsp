@@ -45,7 +45,7 @@
             %>
                 <tr>
                     <td><%= rs.getString("patient_name") %></td>
-                    <td>Dr. <%= rs.getString("doctor_name") %></td>
+                    <td> <%= rs.getString("doctor_name") %></td>
                     <td><%= rs.getDate("appointment_date") %></td>
                     <td><%= rs.getTime("appointment_time") %></td>
                     <td style="text-transform:capitalize;"><%= rs.getString("channel_type") %></td>
