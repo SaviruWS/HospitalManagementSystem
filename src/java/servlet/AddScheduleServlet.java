@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
@@ -26,12 +27,30 @@ public class AddScheduleServlet extends HttpServlet {
         String endTime = request.getParameter("endTime");
         String maxPatientsStr = request.getParameter("maxPatients");
 
+        // Validation : the date itself cannot be in the past
+        try {
+            Date parsedDate = Date.valueOf(availableDate);
+            Date today = new Date(System.currentTimeMillis());
+            if (parsedDate.before(today)) {
+                response.sendRedirect("doctor/manageSchedule.jsp?error=pastdate");
+                return;
+            }
+        } catch (IllegalArgumentException dateEx) {
+            response.sendRedirect("doctor/manageSchedule.jsp?error=1");
+            return;
+        }
+
+        // Validation end time must be after start time
+        if (endTime.compareTo(startTime) <= 0) {
+            response.sendRedirect("doctor/manageSchedule.jsp?error=badtime");
+            return;
+        }
+
         Connection conn = null;
 
         try {
             conn = DBConnection.getConnection();
 
-            // Step 1: Find this logged-in user's doctor_id
             PreparedStatement doctorLookup = conn.prepareStatement(
                 "SELECT doctor_id FROM doctors WHERE user_id = ?");
             doctorLookup.setInt(1, userId);
@@ -43,12 +62,10 @@ public class AddScheduleServlet extends HttpServlet {
             }
 
             if (doctorId == -1) {
-                // Safety check — this account isn't linked to a doctors record
                 response.sendRedirect("doctor/manageSchedule.jsp?error=1");
                 return;
             }
 
-            // Step 2: Insert the new schedule slot
             PreparedStatement insertStmt = conn.prepareStatement(
                 "INSERT INTO doctor_schedule (doctor_id, available_date, start_time, end_time, max_patients) " +
                 "VALUES (?, ?, ?, ?, ?)");

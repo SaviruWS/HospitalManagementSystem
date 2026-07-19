@@ -18,9 +18,19 @@
             String error = request.getParameter("error");
             String success = request.getParameter("success");
             if (error != null) {
+                if ("pastdate".equals(error)) {
+        %>
+            <div class="alert alert-error">You cannot add a schedule slot for a past date.</div>
+        <%
+                } else if ("badtime".equals(error)) {
+        %>
+            <div class="alert alert-error">End time must be after start time.</div>
+        <%
+                } else {
         %>
             <div class="alert alert-error">Something went wrong. Please check your inputs.</div>
         <%
+                }
             } else if (success != null) {
                 if ("deleted".equals(success)) {
         %>
@@ -41,7 +51,7 @@
 
         <form action="../AddScheduleServlet" method="post">
             <label>Available Date</label>
-            <input type="date" name="availableDate" required>
+            <input type="date" name="availableDate" min="<%= java.time.LocalDate.now() %>" required>
 
             <label>Start Time</label>
             <input type="time" name="startTime" required>
