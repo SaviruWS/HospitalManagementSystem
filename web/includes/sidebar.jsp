@@ -42,6 +42,7 @@
                 <a href="dashboard.jsp">Dashboard</a>
                 <a href="registerPatient.jsp">Register Patient</a>
                 <a href="patientList.jsp">Patient List</a>
+                <a href="doctorSearch.jsp">Find a Doctor</a>
                 <a href="bookAppointment.jsp">Book Appointment</a>
                 <a href="pendingAppointments.jsp">Pending Appointments</a>
                 <a href="allAppointments.jsp">All Appointments</a>

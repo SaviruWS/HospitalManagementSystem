@@ -30,7 +30,7 @@
 
         <form method="get" action="bookAppointment.jsp">
             <label>Select Patient</label>
-            <select name="patientId" required>
+            <select name="patientId" onchange="this.form.submit()" required>
                 <option value="">-- Select Patient --</option>
                 <%
                     Connection conn = null;
