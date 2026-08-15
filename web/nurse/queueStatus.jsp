@@ -51,7 +51,7 @@
                         boolean arrived = arrivalRs.getBoolean("doctor_arrived");
             %>
                 <tr>
-                    <td>Dr. <%= arrivalRs.getString("full_name") %></td>
+                    <td> <%= arrivalRs.getString("full_name") %></td>
                     <td><%= arrivalRs.getTime("start_time") %> - <%= arrivalRs.getTime("end_time") %></td>
                     <td>
                         <% if (arrived) { %>
@@ -120,7 +120,7 @@
                 <tr>
                     <td><%= rs.getTime("appointment_time") %></td>
                     <td><%= rs.getString("patient_name") %></td>
-                    <td>Dr. <%= rs.getString("doctor_name") %></td>
+                    <td>  <%= rs.getString("doctor_name") %></td>
                     <td>
                         <%
                             String badgeClass = "badge-pending";

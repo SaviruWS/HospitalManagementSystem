@@ -48,6 +48,8 @@
                 <a href="bookAppointment.jsp">Book Appointment</a>
                 <a href="pendingAppointments.jsp">Pending Appointments</a>
                 <a href="allAppointments.jsp">All Appointments</a>
+                <a href="generateBill.jsp">Generate Bill</a>
+                <a href="billList.jsp">Bill History</a>
             <% } else if ("patient".equals(role)) { %>
                 <a href="dashboard.jsp">Dashboard</a>
                 <a href="bookAppointment.jsp">Book Appointment</a>
