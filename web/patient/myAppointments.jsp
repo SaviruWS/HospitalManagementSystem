@@ -13,6 +13,48 @@
         <div class="welcome-badge">Welcome, <strong><%= fullName %></strong></div>
     </div>
 
+    <%
+        // Show an arrival banner for the patient's nearest today's confirmed appointment, if any
+        Integer bannerUserId = (Integer) session.getAttribute("userId");
+        Connection bannerConn = null;
+        try {
+            bannerConn = DBConnection.getConnection();
+            PreparedStatement bannerLookup = bannerConn.prepareStatement(
+                "SELECT ud.full_name AS doctor_name, ds.doctor_arrived, a.appointment_time " +
+                "FROM appointments a " +
+                "JOIN patients p ON a.patient_id = p.patient_id " +
+                "JOIN doctors d ON a.doctor_id = d.doctor_id " +
+                "JOIN users ud ON d.user_id = ud.user_id " +
+                "JOIN doctor_schedule ds ON a.schedule_id = ds.schedule_id " +
+                "WHERE p.user_id = ? AND a.appointment_date = CURDATE() AND a.status = 'confirmed' " +
+                "ORDER BY a.appointment_time LIMIT 1");
+            bannerLookup.setInt(1, bannerUserId);
+            ResultSet bannerRs = bannerLookup.executeQuery();
+
+            if (bannerRs.next()) {
+                boolean arrived = bannerRs.getBoolean("doctor_arrived");
+                String doctorName = bannerRs.getString("doctor_name");
+                if (arrived) {
+    %>
+        <div class="alert alert-success">
+            🟢 Dr. <%= doctorName %> has arrived — consultations are in progress. Please check the queue below for your position.
+        </div>
+    <%
+                } else {
+    %>
+        <div class="alert alert-info">
+            🕒 Dr. <%= doctorName %> has not yet arrived for today's session. We'll update this once they do.
+        </div>
+    <%
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (bannerConn != null) { try { bannerConn.close(); } catch (Exception e) { e.printStackTrace(); } }
+        }
+    %>
+
     <div class="card">
         <table>
             <tr>

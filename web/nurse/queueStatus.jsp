@@ -13,16 +13,81 @@
         <div class="welcome-badge">Welcome, <strong><%= fullName %></strong></div>
     </div>
 
+    <%
+        String success = request.getParameter("success");
+        if (success != null) {
+    %>
+        <div class="alert alert-success">Updated successfully.</div>
+    <%
+        }
+    %>
+
     <div class="card">
-        <%
-            String success = request.getParameter("success");
-            if (success != null) {
-        %>
-            <div class="alert alert-success">Status updated.</div>
-        <%
-            }
-        %>
+        <h3 style="margin-top:0; color: var(--color-navy);">Today's Doctors</h3>
         <table>
+            <tr>
+                <th>Doctor</th>
+                <th>Session Time</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <%
+                Connection arrivalConn = null;
+                try {
+                    arrivalConn = DBConnection.getConnection();
+                    PreparedStatement arrivalStmt = arrivalConn.prepareStatement(
+                        "SELECT ds.schedule_id, u.full_name, ds.start_time, ds.end_time, ds.doctor_arrived " +
+                        "FROM doctor_schedule ds " +
+                        "JOIN doctors d ON ds.doctor_id = d.doctor_id " +
+                        "JOIN users u ON d.user_id = u.user_id " +
+                        "WHERE ds.available_date = CURDATE() AND ds.status = 'active' " +
+                        "ORDER BY ds.start_time");
+                    ResultSet arrivalRs = arrivalStmt.executeQuery();
+
+                    boolean anyDoctor = false;
+                    while (arrivalRs.next()) {
+                        anyDoctor = true;
+                        int schedId = arrivalRs.getInt("schedule_id");
+                        boolean arrived = arrivalRs.getBoolean("doctor_arrived");
+            %>
+                <tr>
+                    <td>Dr. <%= arrivalRs.getString("full_name") %></td>
+                    <td><%= arrivalRs.getTime("start_time") %> - <%= arrivalRs.getTime("end_time") %></td>
+                    <td>
+                        <% if (arrived) { %>
+                            <span class="badge badge-confirmed">Arrived</span>
+                        <% } else { %>
+                            <span class="badge badge-cancelled">Not Arrived</span>
+                        <% } %>
+                    </td>
+                    <td>
+                        <form action="../ToggleDoctorArrivedServlet" method="post" style="display:inline;">
+                            <input type="hidden" name="scheduleId" value="<%= schedId %>">
+                            <input type="hidden" name="newValue" value="<%= arrived ? "0" : "1" %>">
+                            <button type="submit" class="btn btn-sm <%= arrived ? "btn-danger" : "btn-success" %>">
+                                <%= arrived ? "Mark as Left" : "Mark Arrived" %>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <%
+                    }
+                    if (!anyDoctor) {
+            %>
+                <tr><td colspan="4">No doctor sessions scheduled for today.</td></tr>
+            <%
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    if (arrivalConn != null) { try { arrivalConn.close(); } catch (Exception e) { e.printStackTrace(); } }
+                }
+            %>
+        </table>
+    </div>
+
+    <div class="card">
+        <h3 style="margin-top:0; color: var(--color-navy);">Patient Queue</h3>
             <tr>
                 <th>Time</th>
                 <th>Patient</th>
