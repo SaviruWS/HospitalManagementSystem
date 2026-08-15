@@ -21,6 +21,7 @@
                 <th>Time</th>
                 <th>Channel</th>
                 <th>Status</th>
+                <th>Queue</th>
             </tr>
             <%
                 Integer userId = (Integer) session.getAttribute("userId");
@@ -39,7 +40,7 @@
 
                     PreparedStatement stmt = conn.prepareStatement(
                         "SELECT ud.full_name AS doctor_name, a.appointment_date, a.appointment_time, " +
-                        "a.channel_type, a.status " +
+                        "a.channel_type, a.status, a.visit_status, a.doctor_id " +
                         "FROM appointments a " +
                         "JOIN doctors d ON a.doctor_id = d.doctor_id " +
                         "JOIN users ud ON d.user_id = ud.user_id " +
@@ -52,19 +53,53 @@
                     while (rs.next()) {
                         any = true;
                         String status = rs.getString("status");
+                        String visitStatus = rs.getString("visit_status");
+                        java.sql.Date apptDate = rs.getDate("appointment_date");
+                        boolean isToday = apptDate.toLocalDate().isEqual(java.time.LocalDate.now());
             %>
                 <tr>
                     <td>Dr. <%= rs.getString("doctor_name") %></td>
-                    <td><%= rs.getDate("appointment_date") %></td>
+                    <td><%= apptDate %></td>
                     <td><%= rs.getTime("appointment_time") %></td>
                     <td style="text-transform:capitalize;"><%= rs.getString("channel_type") %></td>
                     <td><span class="badge badge-<%= status %>"><%= status %></span></td>
+                    <td>
+                        <% if (isToday && "confirmed".equals(status)) {
+                            if ("waiting".equals(visitStatus)) {
+                                PreparedStatement posStmt = conn.prepareStatement(
+                                    "SELECT COUNT(*) AS pos FROM appointments " +
+                                    "WHERE doctor_id = ? AND appointment_date = CURDATE() " +
+                                    "AND visit_status = 'waiting' AND appointment_time <= ?");
+                                posStmt.setInt(1, rs.getInt("doctor_id"));
+                                posStmt.setTime(2, rs.getTime("appointment_time"));
+                                ResultSet posRs = posStmt.executeQuery();
+                                int position = posRs.next() ? posRs.getInt("pos") : 0;
+                        %>
+                            <span class="badge badge-pending">Waiting (#<%= position %>)</span>
+                        <%
+                            } else if ("with_doctor".equals(visitStatus)) {
+                        %>
+                            <span class="badge badge-confirmed">With Doctor</span>
+                        <%
+                            } else if ("completed".equals(visitStatus)) {
+                        %>
+                            <span class="badge badge-completed">Completed</span>
+                        <%
+                            } else {
+                        %>
+                            <span class="badge badge-cancelled">Not Arrived</span>
+                        <%
+                            }
+                        } else { %>
+                            <span style="color: var(--color-text-muted);">-</span>
+                        <% } %>
+                    </td>
                 </tr>
             <%
                     }
                     if (!any) {
             %>
-                <tr><td colspan="5">You haven't booked any appointments yet.</td></tr>
+                <tr><td colspan="6">You haven't booked any appointments yet.</td></tr>
             <%
                     }
                 } catch (Exception e) {

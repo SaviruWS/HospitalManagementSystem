@@ -26,6 +26,7 @@
             <% if ("admin".equals(role)) { %>
                 <a href="<%= request.getContextPath() %>/admin/dashboard.jsp">Dashboard</a>
                 <a href="<%= request.getContextPath() %>/admin/addStaff.jsp">Add Staff</a>
+                <a href="<%= request.getContextPath() %>/admin/manageUsers.jsp">Manage Users</a>
                 <a href="<%= request.getContextPath() %>/receptionist/patientList.jsp">Patient List</a>
                 <a href="<%= request.getContextPath() %>/receptionist/allAppointments.jsp">All Appointments</a>
                 <a href="<%= request.getContextPath() %>/receptionist/pendingAppointments.jsp">Pending Appointments</a>
@@ -35,6 +36,7 @@
                 <a href="myAppointments.jsp">My Appointments</a>
             <% } else if ("nurse".equals(role)) { %>
                 <a href="dashboard.jsp">Dashboard</a>
+                <a href="queueStatus.jsp">Today's Queue</a>
                 <a href="recordVitals.jsp">Record Vitals</a>
                 <a href="searchPatientVitals.jsp">Search Patient Vitals</a>
                 <a href="appointments.jsp">Today's Appointments</a>
