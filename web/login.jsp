@@ -10,6 +10,10 @@
         <div class="logo-wrap">
             <img src="images/logo.jpg" alt="NovaCare Private Hospital">
         </div>
+        <h2>Welcome Back</h2>
+        <p style="text-align:center; color: var(--color-text-muted); font-size:14px; margin-top:-10px; margin-bottom:22px;">
+            Log in to your NovaCare account
+        </p>
 
         <%
             String error = request.getParameter("error");
@@ -39,6 +43,7 @@
             <button type="submit" class="btn" style="width:100%;">Login</button>
         </form>
         <a href="registerSelf.jsp">New patient? Register here</a>
+        <a href="index.jsp" style="margin-top:6px; color: var(--color-text-muted);">&larr; Back to Home</a>
     </div>
 </body>
 </html>

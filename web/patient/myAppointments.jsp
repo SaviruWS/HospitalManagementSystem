@@ -37,13 +37,13 @@
                 if (arrived) {
     %>
         <div class="alert alert-success">
-            🟢 Dr. <%= doctorName %> has arrived — consultations are in progress. Please check the queue below for your position.
+            🟢  <%= doctorName %> has arrived — consultations are in progress. Please check the queue below for your position.
         </div>
     <%
                 } else {
     %>
         <div class="alert alert-info">
-            🕒 Dr. <%= doctorName %> has not yet arrived for today's session. We'll update this once they do.
+            🕒  <%= doctorName %> has not yet arrived for today's session. We'll update this once they do.
         </div>
     <%
                 }
@@ -100,7 +100,7 @@
                         boolean isToday = apptDate.toLocalDate().isEqual(java.time.LocalDate.now());
             %>
                 <tr>
-                    <td>Dr. <%= rs.getString("doctor_name") %></td>
+                    <td> <%= rs.getString("doctor_name") %></td>
                     <td><%= apptDate %></td>
                     <td><%= rs.getTime("appointment_time") %></td>
                     <td style="text-transform:capitalize;"><%= rs.getString("channel_type") %></td>

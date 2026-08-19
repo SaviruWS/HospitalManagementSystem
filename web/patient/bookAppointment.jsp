@@ -46,7 +46,7 @@
                             String selected = did.equals(selectedDoctorId) ? "selected" : "";
                 %>
                     <option value="<%= did %>" <%= selected %>>
-                        Dr. <%= doctorRs.getString("full_name") %> (<%= doctorRs.getString("specialization") %>)
+                         <%= doctorRs.getString("full_name") %> (<%= doctorRs.getString("specialization") %>)
                     </option>
                 <%
                         }
