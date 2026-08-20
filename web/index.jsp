@@ -177,7 +177,7 @@
                 accessible, high-quality healthcare to our community.
                 With a team of experienced doctors, modern diagnostic
                 facilities, and a patient-first approach, we make it
-                easy to get the care you need — whether you walk in,
+                easy to get the care you need | whether you walk in,
                 call us, or book online.
             </p>
 
