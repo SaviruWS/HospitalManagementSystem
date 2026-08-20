@@ -9,9 +9,8 @@
 
 <body>
 
-<!-- =========================
-     TOP INFORMATION BAR
-     ========================= -->
+<!--TOP INFORMATION BAR -->
+
 <div class="pub-topbar">
     <div>
         <strong>24/7 Emergency:</strong>
@@ -25,9 +24,9 @@
 </div>
 
 
-<!-- =========================
+<!--
      MAIN NAVIGATION
-     ========================= -->
+      -->
 <div class="pub-header">
 
     <a href="#home" class="pub-logo-link">
@@ -51,9 +50,9 @@
 </div>
 
 
-<!-- =========================
+<!-- 
      HERO SECTION
-     ========================= -->
+     -->
 <div class="pub-hero" id="home">
 
     <div class="pub-hero-content">
@@ -91,9 +90,9 @@
 </div>
 
 
-<!-- =========================
+<!-- 
      SERVICES SECTION
-     ========================= -->
+     -->
 <div class="pub-section" id="services">
 
     <h2>Our Services</h2>
@@ -105,7 +104,7 @@
     <div class="pub-grid">
 
         <div class="pub-card">
-            <div class="pub-icon">🫀</div>
+            <img src="images/cardiology.png" alt="Cardiology" class="pub-service-img">
             <h3>Cardiology</h3>
             <p>
                 Comprehensive heart care from diagnostics to treatment.
@@ -113,7 +112,7 @@
         </div>
 
         <div class="pub-card">
-            <div class="pub-icon">🦴</div>
+            <img src="images/Orthopaedics.png" alt="Orthopaedics" class="pub-service-img">
             <h3>Orthopaedics</h3>
             <p>
                 Bone, joint, and sports injury care for all ages.
@@ -121,7 +120,7 @@
         </div>
 
         <div class="pub-card">
-            <div class="pub-icon">👶</div>
+            <img src="images/Paediatrics.png" alt="Paediatrics" class="pub-service-img">
             <h3>Paediatrics</h3>
             <p>
                 Dedicated care for infants, children, and adolescents.
@@ -129,7 +128,7 @@
         </div>
 
         <div class="pub-card">
-            <div class="pub-icon">🩺</div>
+            <img src="images/General_Medicine.png" alt="General Medicine" class="pub-service-img">
             <h3>General Medicine</h3>
             <p>
                 Everyday health concerns handled by experienced physicians.
@@ -137,7 +136,7 @@
         </div>
 
         <div class="pub-card">
-            <div class="pub-icon">👁️</div>
+            <img src="images/eyecare.png" alt="Eye Care" class="pub-service-img">
             <h3>Eye Care</h3>
             <p>
                 Complete eye examinations and treatment services.
@@ -145,7 +144,7 @@
         </div>
 
         <div class="pub-card">
-            <div class="pub-icon">🧠</div>
+            <img src="images/Neurology.png" alt="Neurology" class="pub-service-img">
             <h3>Neurology</h3>
             <p>
                 Expert diagnosis and care for neurological conditions.
@@ -157,9 +156,8 @@
 </div>
 
 
-<!-- =========================
-     ABOUT SECTION
-     ========================= -->
+
+<!-- About section -->
 <div class="pub-section pub-about" id="about">
 
     <div class="pub-about-grid">
@@ -195,10 +193,10 @@
 </div>
 
 
-<!-- =========================
+<!-- 
      NEWS & UPDATES SECTION
-     ========================= -->
-<div class="pub-section" id="news">
+    -->
+<div class="pub-section news-section" id="news">
 
     <h2>News &amp; Updates</h2>
 
@@ -272,9 +270,9 @@
 </div>
 
 
-<!-- =========================
+<!-- 
      APPOINTMENT CALL TO ACTION
-     ========================= -->
+      -->
 <div class="pub-cta">
 
     <h2>Ready to book your visit?</h2>
@@ -291,15 +289,15 @@
 </div>
 
 
-<!-- =========================
+<!--
      FOOTER
-     ========================= -->
+     -->
 <div class="pub-footer" id="contact">
 
     <div class="pub-footer-grid">
 
         <div>
-            <h4>NovaCare Private Hospital</h4>
+            <h4>NovaCare Private Hospital Matara</h4>
 
             <p>
                 Providing compassionate, modern healthcare

@@ -3,6 +3,8 @@ package servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
@@ -29,16 +31,18 @@ public class AddScheduleServlet extends HttpServlet {
 
         // Validation : the date itself cannot be in the past
         try {
-            Date parsedDate = Date.valueOf(availableDate);
-            Date today = new Date(System.currentTimeMillis());
-            if (parsedDate.before(today)) {
-                response.sendRedirect("doctor/manageSchedule.jsp?error=pastdate");
-                return;
-            }
-        } catch (IllegalArgumentException dateEx) {
-            response.sendRedirect("doctor/manageSchedule.jsp?error=1");
-            return;
-        }
+    LocalDate selectedDate = LocalDate.parse(availableDate);
+    LocalDate today = LocalDate.now();
+
+    if (selectedDate.isBefore(today)) {
+        response.sendRedirect("doctor/manageSchedule.jsp?error=pastdate");
+        return;
+    }
+
+} catch (DateTimeParseException dateEx) {
+    response.sendRedirect("doctor/manageSchedule.jsp?error=1");
+    return;
+}
 
         // Validation end time must be after start time
         if (endTime.compareTo(startTime) <= 0) {
